@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.UserMapper">
+    <resultMap type="com.example.demo.entity.User" id="userResult">
+          <result property="id" column="id" />
+          <result  property="name" column="name"/>
+           <result property="password" column="password" />
+    </resultMap>
+    <select id="getAllUser" resultMap="userResult">
+       select id ,name ,password from tb_user order by id desc
+    </select>
+
+    <insert id="insertUser" parameterType="com.example.demo.entity.User" >
+       insert into tb_user(id,name,password) values (#{id},#{name},#{password})
+    </insert>
+
+    <update id="updateUser"  parameterType="com.example.demo.entity.User">
+        update tb_user set name=#{name} password={#password}
+    </update>
+
+    <select id="getUserById"  resultType="com.example.demo.entity.User" >
+        select id ,name,password from tb_user where id =#{id}
+    </select>
+
+    <delete id="deleteUserById" parameterType="int">
+        delete  from tb_user where id =#{id}
+    </delete>
+</mapper>
